@@ -25,10 +25,10 @@ async def successful_payment_handler(callback: CallbackQuery, bot: Bot, callback
             await callback.message.answer_document(document=FSInputFile('christmas.pdf', filename='Рождество.pdf'),
                                                    caption=lexicon['succeeded'])
         elif payment.description == 'Трекер чтения Библии':
-            await bot.send_media_group(chat_id=callback.from_user.id, media=[InputMediaDocument(media=FSInputFile('Treker_chtenia_Biblii_-_pechat/Закладки А4 для принтера по порядку.pdf', filename='Закладки А4 Для принтера по порядку')),
-                                                              InputMediaDocument(media=FSInputFile('Treker_chtenia_Biblii_-_pechat/Закладки А4 поворот по вертикали.pdf', filename='Закладки А4 Поворот по вертикали')),
-                                                              InputMediaDocument(media=FSInputFile('Treker_chtenia_Biblii_-_pechat/Закладки А4 поворот по горизонтали.pdf',filename='Закладки А4 Поворот по горизонтали')),
-                                                              InputMediaDocument(media=FSInputFile('Treker_chtenia_Biblii_-_pechat/Как правильно распечатать закладки.docx',filename='Как_правильно_распечатать_закладки'))])
+            await bot.send_media_group(chat_id=callback.from_user.id, media=[InputMediaDocument(media=FSInputFile('Treker/Закладки А4 для принтера по порядку.pdf', filename='Закладки А4 Для принтера по порядку')),
+                                                              InputMediaDocument(media=FSInputFile('Treker/Закладки А4 поворот по вертикали.pdf', filename='Закладки А4 Поворот по вертикали')),
+                                                              InputMediaDocument(media=FSInputFile('Treker/Закладки А4 поворот по горизонтали.pdf',filename='Закладки А4 Поворот по горизонтали')),
+                                                              InputMediaDocument(media=FSInputFile('Treker/Как правильно распечатать закладки.docx',filename='Как_правильно_распечатать_закладки'))])
             await callback.message.answer(text=lexicon['succeeded'])
         elif payment.description == "Пасха":
             await callback.message.answer_document(document=FSInputFile('easter.pdf', filename='Пасха.pdf'),
