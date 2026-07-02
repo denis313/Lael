@@ -39,7 +39,7 @@ async def start_command(message: Message):
     await bot.send_photo(chat_id=message.from_user.id, photo=get_photo8(), caption=lexicon["posters"], reply_markup=kb_posters())
 
 
-@router.callback_query(F.data == 'white' or F.data == 'yellow')
+@router.callback_query(F.data.in_({"white", "yellow"}))
 async def check_posters(callback: CallbackQuery):
     loop = asyncio.get_event_loop()
     description = 'Бог есть любовь'
@@ -54,4 +54,4 @@ async def check_posters(callback: CallbackQuery):
                                                     callback.message.from_user.id,
                                                     callback.message.from_user.username or None)
     kb = kb_buy(id_payment=id_prepayment, url=url)
-    await bot.send_photo(chat_id=callback.message.from_user.id, photo=photo, reply_markup=kb)
+    await bot.send_photo(chat_id=callback.from_user.id, photo=photo, reply_markup=kb)

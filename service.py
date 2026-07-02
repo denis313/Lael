@@ -15,37 +15,37 @@ from lexicon import lexicon
 
 
 def get_photo():
-    photo = FSInputFile('image.jpg', filename=f'photo_img')
+    photo = FSInputFile('Images/image.jpg', filename=f'photo_img')
     return photo
 
 
 def get_photo2():
-    photo = FSInputFile('image2.jpg', filename=f'photo_img')
+    photo = FSInputFile('Images/image2.jpg', filename=f'photo_img')
     return photo
 
 
 def get_photo3():
-    photo = FSInputFile('image3.jpg', filename=f'photo_img')
+    photo = FSInputFile('Images/image3.jpg', filename=f'photo_img')
     return photo
 
 def get_photo4():
-    photo = FSInputFile('image4.png', filename=f'photo_png')
+    photo = FSInputFile('Images/image4.png', filename=f'photo_png')
     return photo
 
 def get_photo5():
-    photo = FSInputFile('image5.jpg', filename=f'photo_jpg')
+    photo = FSInputFile('Images/image5.jpg', filename=f'photo_jpg')
     return photo
 
 def get_photo6():
-    photo = FSInputFile('image6.jpg', filename=f'photo_jpg')
+    photo = FSInputFile('Images/image6.jpg', filename=f'photo_jpg')
     return photo
 
 def get_photo7():
-    photo = FSInputFile('image7.jpg', filename=f'photo_jpg')
+    photo = FSInputFile('Images/image7.jpg', filename=f'photo_jpg')
     return photo
 
 def get_photo8():
-    photo = FSInputFile('image8.jpg', filename=f'photo_jpg')
+    photo = FSInputFile('Images/image8.png', filename=f'photo_jpg')
     return photo
 
 

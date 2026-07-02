@@ -34,12 +34,10 @@ async def successful_payment_handler(callback: CallbackQuery, bot: Bot, callback
             await callback.message.answer_document(document=FSInputFile('easter.pdf', filename='Пасха.pdf'),
                                                    caption=lexicon['succeeded'])
         elif payment.description == 'Помощь моя от Господа':
-            await bot.send_media_group(chat_id=callback.from_user.id, media=[InputMediaDocument(
-                media=FSInputFile('Posters/Постеры строгие бот.pdf',
-                                  filename='Помощь моя от Господа'))])
+            await callback.message.answer_document(document=FSInputFile('Posters/Постеры строгие.pdf',
+                                  filename='Помощь моя от Господа.pdf'))
         elif payment.description == 'Бог есть любовь':
-            await bot.send_media_group(chat_id=callback.from_user.id, media=[InputMediaDocument(
-                media=FSInputFile('Posters/Постеры дофамин бот.pdf',
-                                  filename='Бог есть любовь'))])
+            await callback.message.answer_document(document=FSInputFile('Posters/Постеры дофамин.pdf',
+                                  filename='Бог есть любовь.pdf'))
     else:
         await callback.message.answer(text=lexicon['failed'])
