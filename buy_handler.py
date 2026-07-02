@@ -19,10 +19,10 @@ async def successful_payment_handler(callback: CallbackQuery, bot: Bot, callback
     payment = await loop.run_in_executor(None, yookassa.Payment.find_one, callback_data.pay_id)
     if payment.status == 'succeeded':
         if payment.description == 'Покупка игры':
-            await callback.message.answer_document(document=FSInputFile('game.pdf', filename='Игра.pdf'),
+            await callback.message.answer_document(document=FSInputFile('game.pdf', filename='game.pdf'),
                                                    caption=lexicon['succeeded'])
         elif payment.description == "Рождество":
-            await callback.message.answer_document(document=FSInputFile('christmas.pdf', filename='Рождество.pdf'),
+            await callback.message.answer_document(document=FSInputFile('christmas.pdf', filename='christmas.pdf'),
                                                    caption=lexicon['succeeded'])
         elif payment.description == 'Трекер чтения Библии':
             await bot.send_media_group(chat_id=callback.from_user.id, media=[InputMediaDocument(media=FSInputFile('Treker/Закладки А4 для принтера по порядку.pdf', filename='Закладки А4 Для принтера по порядку')),
@@ -31,7 +31,7 @@ async def successful_payment_handler(callback: CallbackQuery, bot: Bot, callback
                                                               InputMediaDocument(media=FSInputFile('Treker/Как правильно распечатать закладки.docx',filename='Как_правильно_распечатать_закладки'))])
             await callback.message.answer(text=lexicon['succeeded'])
         elif payment.description == "Пасха":
-            await callback.message.answer_document(document=FSInputFile('easter.pdf', filename='Пасха.pdf'),
+            await callback.message.answer_document(document=FSInputFile('easter.pdf', filename='easter.pdf'),
                                                    caption=lexicon['succeeded'])
         elif payment.description == 'Помощь моя от Господа':
             await callback.message.answer_document(document=FSInputFile('Posters/Постеры строгие.pdf',
