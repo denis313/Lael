@@ -2,7 +2,7 @@ import asyncio
 import logging
 from aiogram import Dispatcher
 
-import start_handler, buy_handler
+import handler
 from bot import bot
 
 # Инициализируем логгер модуля
@@ -22,7 +22,7 @@ async def main():
     dp = Dispatcher()
 
     # Регистриуем роутеры в диспетчере
-    dp.include_routers(start_handler.router, buy_handler.router)
+    dp.include_routers(handler.router)
 
     # Пропускаем накопившиеся апдейты и запускаем polling
     await bot.delete_webhook(drop_pending_updates=True)

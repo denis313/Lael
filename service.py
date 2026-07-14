@@ -1,3 +1,4 @@
+import asyncio
 import re
 import uuid
 import logging
@@ -99,7 +100,55 @@ def create_payment(amount: int, description: str, chat_id: int, name: str):
     except Exception as e:
         logging.error(f"Ошибка при создании платежа: {e}")
         raise
+PRODUCTS = {
+    "cards": {
+        "price": 300,
+        "description": "Покупка игры",
+        "photo": get_photo(),
+        "caption": lexicon["cards"]
+    },
+    "christmas": {
+        "price": 100,
+        "description": "Рождество",
+        "photo": get_photo2(),
+    },
+    "bookmarks": {
+        "price": 200,
+        "description": "Трекер чтения Библии",
+        "photo": get_photo4(),
+        "caption": lexicon["bookmarks"]
+    },
+    "easter": {
+        "price": 100,
+        "description": "Пасха",
+        "photo": get_photo5(),
+        "caption": lexicon["easter"]
+    },
+    "posters": {
+        "price": 300,
+        "description": "Постеры",
+        "photo": get_photo8(),
+        "caption": lexicon["posters"]
+    },
 
+}
+
+async def create_payment_2(callback: CallbackQuery):
+
+    product = PRODUCTS[callback.data]
+
+    loop = asyncio.get_running_loop()
+
+    url, payment_id = await loop.run_in_executor(
+        None,
+        create_payment,
+        product["price"],
+        product["description"],
+        callback.from_user.id,
+        callback.from_user.username,
+    )
+
+    return url, payment_id
 
 
 # def create_payment(amount: int, description: str, chat_id: int, name: str):
