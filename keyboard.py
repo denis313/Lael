@@ -32,6 +32,13 @@ def kb_buy(url:str, id_payment):
     return kb.as_markup()
 
 
+def kb_again(id_payment):
+    kb = InlineKeyboardBuilder()
+    kb.row(InlineKeyboardButton(text='Скачать ещё раз 📥',
+                                callback_data=Pay(pay_id=id_payment).pack()))
+    return kb.as_markup()
+
+
 def kb_posters():
     kb = InlineKeyboardBuilder()
     kb.row(*[InlineKeyboardButton(text='Помощь моя от Господа', callback_data='white'),

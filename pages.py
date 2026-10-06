@@ -142,26 +142,29 @@ async def show_purchase(callback: CallbackQuery, bot: Bot, callback_data: kb.Pay
     loop = asyncio.get_event_loop()
     payment = await loop.run_in_executor(None, yookassa.Payment.find_one, callback_data.pay_id)
     if payment.status == 'succeeded':
+        # Кнопка на сообщении с файлом: меню редактирует только сообщение с карточкой товара,
+        # поэтому эта кнопка остаётся, и покупатель может получить файл повторно.
+        again = kb.kb_again(callback_data.pay_id)
         if payment.description == 'Покупка игры':
             await callback.message.answer_document(document=FSInputFile('game.pdf', filename='game.pdf'),
-                                                   caption=lexicon['succeeded'])
+                                                   caption=lexicon['succeeded'], reply_markup=again)
         elif payment.description == "Рождество":
             await callback.message.answer_document(document=FSInputFile('christmas.pdf', filename='christmas.pdf'),
-                                                   caption=lexicon['succeeded'])
+                                                   caption=lexicon['succeeded'], reply_markup=again)
         elif payment.description == 'Трекер чтения Библии':
             await bot.send_media_group(chat_id=callback.from_user.id, media=[InputMediaDocument(media=FSInputFile('Treker/Закладки А4 для принтера по порядку.pdf', filename='Закладки А4 Для принтера по порядку')),
                                                               InputMediaDocument(media=FSInputFile('Treker/Закладки А4 поворот по вертикали.pdf', filename='Закладки А4 Поворот по вертикали')),
                                                               InputMediaDocument(media=FSInputFile('Treker/Закладки А4 поворот по горизонтали.pdf',filename='Закладки А4 Поворот по горизонтали')),
                                                               InputMediaDocument(media=FSInputFile('Treker/Как правильно распечатать закладки.docx',filename='Как_правильно_распечатать_закладки'))])
-            await callback.message.answer(text=lexicon['succeeded'])
+            await callback.message.answer(text=lexicon['succeeded'], reply_markup=again)
         elif payment.description == "Пасха":
             await callback.message.answer_document(document=FSInputFile('easter.pdf', filename='easter.pdf'),
-                                                   caption=lexicon['succeeded'])
+                                                   caption=lexicon['succeeded'], reply_markup=again)
         elif payment.description == 'Помощь моя от Господа':
             await callback.message.answer_document(document=FSInputFile('Posters/Постеры строгие.pdf',
-                                  filename='Помощь моя от Господа.pdf'))
+                                  filename='Помощь моя от Господа.pdf'), reply_markup=again)
         elif payment.description == 'Бог есть любовь':
             await callback.message.answer_document(document=FSInputFile('Posters/Постеры дофамин.pdf',
-                                  filename='Бог есть любовь.pdf'))
+                                  filename='Бог есть любовь.pdf'), reply_markup=again)
     else:
         await callback.message.answer(text=lexicon['failed'])
